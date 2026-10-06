@@ -1,0 +1,21 @@
+<svg width="820" height="200" viewBox="0 0 820 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(0 0)">
+    <path d="M122 22C122 10 132 0 144 0H204C216 0 226 10 226 22V31C226 42 216 52 204 52H144C132 52 122 42 122 31V22Z" fill="#D9AF5B"/>
+    <path d="M110 37C110 18.2223 125.222 3 144 3H204C222.778 3 238 18.2223 238 37V52H110V37Z" fill="#0E2F52"/>
+    <path d="M96 52H246C265.882 52 282 68.1177 282 88V146C282 165.882 265.882 182 246 182H96C76.1177 182 60 165.882 60 146V88C60 68.1177 76.1177 52 96 52Z" fill="#0E2F52"/>
+    <path d="M76 81C89 69 107 64 120 64H222C238 64 255 69 268 80L224 157H124L76 81Z" fill="#F6F6F6"/>
+    <path d="M119 66L164 142H147L105 86L119 66Z" fill="#D9AF5B"/>
+    <path d="M147 68L196 143H176L133 85L147 68Z" fill="#D9AF5B"/>
+    <path d="M177 68L228 142H208L166 85L177 68Z" fill="#D9AF5B"/>
+    <path d="M186 66C201 82 223 106 238 126C251 143 270 155 293 159L278 169C245 163 214 146 192 123C175 105 164 88 155 65L186 66Z" fill="#0E2F52" opacity="0.95"/>
+    <path d="M118 59C130 49 149 46 166 49C190 53 206 64 221 77C236 89 255 95 272 95C250 103 236 110 224 123C212 136 202 150 195 165H177C184 154 196 145 210 132C223 120 236 109 249 101C234 90 219 81 204 72C191 64 178 60 163 58C149 56 134 56 118 59Z" fill="#D9AF5B"/>
+    <path d="M117 58C132 72 146 85 165 91C183 97 204 99 228 95" stroke="#D9AF5B" stroke-width="7" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(330 28)">
+    <text x="0" y="68" font-family="Segoe UI, Arial, sans-serif" font-weight="700" font-size="94" letter-spacing="-2" fill="#0E2F52">Nusa</text>
+    <text x="264" y="68" font-family="Segoe UI, Arial, sans-serif" font-weight="700" font-size="94" letter-spacing="-2" fill="#D9AF5B">One</text>
+    <text x="54" y="108" font-family="Segoe UI, Arial, sans-serif" font-size="23" letter-spacing="4.2" fill="#0E2F52">ONE GATEWAY TO INDONESIA</text>
+    <line x1="54" y1="120" x2="410" y2="120" stroke="#D9AF5B" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+</svg>
