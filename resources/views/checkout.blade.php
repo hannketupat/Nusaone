@@ -1,133 +1,16 @@
-@extends('layouts.master')
-
-@section('styles')
-<style>
-    .page-title {
-        color: var(--navy);
-        font-size: 30px;
-        font-weight: 700;
-        letter-spacing: -0.3px;
-        margin-bottom: 8px;
-    }
-    .gold-rule {
-        width: 64px;
-        height: 4px;
-        background-color: var(--gold);
-        border-radius: 4px;
-        margin-bottom: 30px;
-    }
-
-    .form-card {
-        background-color: var(--white);
-        padding: 26px;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        width: 60%;
-    }
-    .form-group {
-        margin-bottom: 18px;
-    }
-    .form-group label {
-        display: block;
-        color: var(--navy);
-        font-weight: 600;
-        font-size: 15px;
-        margin-bottom: 7px;
-    }
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        padding: 11px 12px;
-        border-radius: 8px;
-        border: 1px solid var(--border);
-        font-family: inherit;
-        font-size: 15px;
-        color: var(--navy);
-        background-color: var(--bg);
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus {
-        outline: none;
-        border-color: var(--gold);
-        box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18);
-    }
-
-    .form-divider {
-        border: 0;
-        border-top: 1px solid var(--border);
-        margin-bottom: 18px;
-    }
-    .total-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 600;
-        font-size: 16px;
-        color: var(--navy);
-        margin-bottom: 20px;
-    }
-    .total-row span {
-        color: var(--gold);
-        font-size: 20px;
-        font-weight: 700;
-    }
-
-    .btn-submit {
-        background-color: var(--navy);
-        color: var(--white);
-        padding: 13px 25px;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 16px;
-        font-family: inherit;
-        cursor: pointer;
-        width: 100%;
-        transition: background-color 0.2s ease, color 0.2s ease;
-    }
-    .btn-submit:hover {
-        background-color: var(--gold);
-        color: var(--navy);
-    }
-
-    @media (max-width: 768px) {
-        .form-card {
-            width: 100%;
-            padding: 20px;
-        }
-        .page-title {
-            font-size: 24px;
-        }
-    }
-</style>
-@endsection
-
-@section('konten_utama')
-<h1 class="page-title">Keranjang Belanja</h1>
-<div class="gold-rule"></div>
-
-<h2 style="color: var(--navy); font-size: 21px; font-weight: 600; margin-bottom: 20px;">Pengiriman &amp; Pembayaran</h2>
-
-<div class="form-card">
-    <form action="/berhasil" method="GET">
-        <div class="form-group">
-            <label for="nama">Nama Lengkap:</label>
-            <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
-        </div>
-        <div class="form-group">
-            <label for="alamat">Alamat Pengiriman:</label>
-            <textarea id="alamat" name="alamat" placeholder="Masukkan alamat lengkap pengiriman" rows="3" required></textarea>
-        </div>
-        <hr class="form-divider">
-        <div class="total-row">
-            <p>Total Bayar:</p>
-            <span>Rp 150.000</span>
-        </div>
-        <button type="submit" class="btn-submit">
-            Konfirmasi Pesanan
-        </button>
-    </form>
-</div>
+@extends('layouts.master') @section('konten_utama') 
+<!-- 1. Navigasi Breadcrumb Checkout --> <div style="margin-bottom: 25px; font-size: 14px; color: #666;"> <a href="/" style="color: #0B5ED7; text-decoration: none;">Katalog Utama</a> <span style="margin: 0 10px;">/</span> <a href="/detail/{{ $product->id }}" style="color: #0B5ED7; text-decoration: none;">{{ $product->name }}</a> <span style="margin: 0 10px;">/</span> <span style="color: #333; font-weight: bold;">Checkout Pesanan</span> </div> 
+<h2 style="margin-bottom: 20px; color: #222;">Formulir Pengiriman & Pembayaran</h2> 
+<div style="display: flex; gap: 30px; align-items: flex-start;"> 
+<!-- KOLOM KIRI: FORMULIR INPUT DATA PEMBELI --> <div style="width: 60%; background-color: white; padding: 25px; border-radius: 8px; border: 1px solid #ccc;"> 
+<!-- PENTING: Gunakan method="POST" dan arahkan action ke "/checkout/proses" --> <form action="/checkout/proses" method="POST"> 
+<!-- WAJIB ADA: Token pengaman CSRF Laravel --> @csrf
+ <!-- INPUT TERSEMBUNYI: Mengirimkan ID Produk yang  sedang dibeli ke Controller -->  <input type="hidden" name="product_id" value="{{  $product->id }}">  <div style="margin-bottom: 15px;">  <label style="font-weight: bold; display: block;  margin-bottom: 5px;">Nama Lengkap Penerima:</label>  <input type="text" name="customer_name"  placeholder="Contoh: Budi Santoso" style="width: 96%; padding: 10px;  border: 1px solid #ccc; border-radius: 4px;" required>  </div>  <div style="margin-bottom: 15px;">  <label style="font-weight: bold; display: block;  margin-bottom: 5px;">Nomor WhatsApp / HP Aktif:</label>  <input type="text" name="customer_phone"  placeholder="Contoh: 081234567890" style="width: 96%; padding: 10px;  border: 1px solid #ccc; border-radius: 4px;" required>  </div>  <div style="margin-bottom: 15px;">  <label style="font-weight: bold; display: block;  margin-bottom: 5px;">Alamat Lengkap Pengiriman:</label>  <textarea name="customer_address" rows="3"  placeholder="Tuliskan Nama Jalan, RT/RW, Kecamatan, dan  Kota/Kabupaten..." style="width: 96%; padding: 10px; border: 1px  solid #ccc; border-radius: 4px;" required></textarea>  </div>  <div style="display: flex; gap: 20px; margin-bottom: 20px;">  <div style="width: 65%;">  <label style="font-weight: bold; display:  block; margin-bottom: 5px;">Pilih Ekspedisi Kurir:</label>  <select name="courier" style="width: 100%;  padding: 10px; border: 1px solid #ccc; border-radius: 4px;  background: white;" required>  <option value="JNE Reguler">JNE Reguler  (Ongkir Rp 15.000)</option>  <option value="J&T Express">J&T Express  (Ongkir Rp 20.000)</option>  <option value="SiCepat BEST">SiCepat BEST  (Ongkir Rp 25.000)</option>  </select>  </div>
+<div style="width: 35%;">  <label style="font-weight: bold; display:  block; margin-bottom: 5px;">Jumlah Beli (Qty):</label>  <input type="number" name="quantity"  value="1" min="1" max="99" style="width: 85%; padding: 10px; border:  1px solid #ccc; border-radius: 4px;" required>  </div>  </div> 
+<button type="submit" style="background-color:  #FFC107; color: black; padding: 15px; width: 100%; border: none;  border-radius: 5px; font-weight: bold; font-size: 16px; cursor:  pointer;"> 
+Konfirmasi & Buat Pesanan Sekarang </button> </form> </div> 
+<!-- KOLOM KANAN: RINGKASAN PRODUK YANG DIPILIH DARI P6 --> <div style="width: 40%; background-color: white; padding: 25px; border-radius: 8px; border: 1px solid #ccc;"> <h3 style="margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 10px;">Ringkasan Pesanan</h3> 
+@if($product->image) <img src="{{ asset('assets/images/'. $product->image) }}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 15px;"> @endif 
+<h3 style="margin: 0 0 5px 0; color: #222;">{{ $product->name }}</h3> <p style="color: #666; font-size: 14px; margin-top: 0;">Harga Satuan Produk:</p> <h2 style="color: #E63946; margin-top: 0;">Rp {{ number_format($product->price, 0, ', ', '.') }})</h2> 
+<hr style="margin: 15px 0; border: 0; border-top: 1px dashed #ccc;"> <p style="font-size: 13px; color: #555; line-height: 1.5;"> *Total tagihan akhir (Harga Produk dikali Jumlah Beli ditambah Ongkos Kirim) akan dihitung secara otomatis oleh sistem pada halaman Invoice setelah Anda menekan tombol Konfirmasi. </p> </div> </div>
 @endsection
