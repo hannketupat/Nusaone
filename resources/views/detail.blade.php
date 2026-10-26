@@ -141,7 +141,7 @@
             </ul>
             <p class="detail-desc">Deskripsi: {{ $product->description }}</p>
 
-            <a href="/checkout" class="btn-buy">
+            <a href="/checkout/{{ $product->id }}" class="btn-buy">
                 Beli Sekarang
             </a>
         </div>
