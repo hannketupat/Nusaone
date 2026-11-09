@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NusaOne - E-Commerce</title>
+    <!-- Google Font Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --navy: #1B2A4E;
@@ -20,7 +24,7 @@
             box-sizing: border-box;
         }
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Plus Jakarta Sans', Arial, Helvetica, sans-serif;
             background-color: var(--bg);
             color: var(--navy);
         }

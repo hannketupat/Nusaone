@@ -34,9 +34,23 @@
  <tr> 
  <td style="padding: 8px 0; color: #666;">Status Pesanan:</td> 
  <td style="padding: 8px 0; text-align: right;"> 
+ @if($transaction->status == 'Pending')
  <span style="background-color: #fff3cd; color: #856404; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 13px;"> 
+ Pending 
+ </span> 
+ @elseif($transaction->status == 'Paid')
+ <span style="background-color: #cfe2ff; color: #084298; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 13px;"> 
+ Paid 
+ </span> 
+ @elseif($transaction->status == 'Shipped')
+ <span style="background-color: #d1e7dd; color: #0f5132; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 13px;"> 
+ Shipped 
+ </span> 
+ @else
+ <span style="background-color: #e2e3e5; color: #41464b; padding: 4px 10px; border-radius: 4px; font-weight: bold; font-size: 13px;"> 
  {{ $transaction->status }} 
  </span> 
+ @endif
  </td> 
  </tr> 
  <tr> 
