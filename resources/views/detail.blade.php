@@ -1,4 +1,4 @@
-@extends('layouts.master')
+﻿@extends('layouts.master')
 
 @section('styles')
 <style>
@@ -102,9 +102,29 @@
         font-size: 16px;
         transition: background-color 0.2s ease, color 0.2s ease;
     }
+    .btn-buy {
+        border: none;
+        font-family: inherit;
+        cursor: pointer;
+    }
     .btn-buy:hover {
         background-color: var(--gold);
         color: var(--navy);
+    }
+    .btn-buy-disabled,
+    .btn-buy-disabled:hover {
+        background-color: #e2e8f0;
+        color: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+    }
+    .detail-image-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 14px;
     }
 
     @media (max-width: 768px) {
@@ -121,12 +141,16 @@
 </style>
 @endsection
 
-@section('konten_utama')
+@section('konten')
     <a href="/" class="back-link">&larr; Kembali ke Katalog</a>
 
     <div class="detail-card">
         <!-- Gambar Kiri -->
-        <img src="{{ asset('assets/images/' . $product->image) }}" alt="{{ $product->name }}" class="detail-image">
+        @if($product->image)
+            <img src="{{ asset('assets/images/' . $product->image) }}" alt="{{ $product->name }}" class="detail-image">
+        @else
+            <div class="detail-image detail-image-empty">Tanpa Gambar</div>
+        @endif
 
         <!-- Spesifikasi Kanan -->
         <div class="detail-info">
@@ -135,15 +159,24 @@
 
             <p class="detail-label">Spesifikasi</p>
             <ul class="detail-spec">
+                <li>Kategori: {{ $product->category ?? '-' }}</li>
+                <li>Stok tersedia: {{ $product->stock }} pcs</li>
                 <li>Bahan: Katun Premium</li>
                 <li>Ukuran tersedia: M, L, XL</li>
                 <li>Kondisi: Baru 100%</li>
             </ul>
             <p class="detail-desc">Deskripsi: {{ $product->description }}</p>
 
-            <a href="/checkout/{{ $product->id }}" class="btn-buy">
-                Beli Sekarang
-            </a>
+            @if($product->stock > 0)
+                <a href="/checkout/{{ $product->id }}" class="btn-buy">
+                    Beli Sekarang
+                </a>
+            @else
+                <button type="button" class="btn-buy btn-buy-disabled" disabled>
+                    Stok Habis
+                </button>
+            @endif
         </div>
     </div>
 @endsection
+

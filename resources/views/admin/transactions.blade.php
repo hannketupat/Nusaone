@@ -14,28 +14,43 @@
         <p style="color: #64748b; font-size: 14px;">Pantau data pesanan masuk dan perbarui status pengiriman pelanggan.</p>
     </div>
 
-    {{-- 3 Kartu Statistik --}}
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 30px;">
+    {{-- 4 Kartu Statistik --}}
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px;">
         <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
             <p style="color: #64748b; font-size: 14px; margin-bottom: 8px; font-weight: 600;">Total Produk</p>
-            <h3 style="font-size: 28px; font-weight: bold; color: #0f172a;">{{ $total_products ?? $product_count ?? 0 }}</h3>
+            <h3 style="font-size: 28px; font-weight: bold; color: #0f172a;">{{ $total_products ?? $total_produk ?? 0 }}</h3>
         </div>
 
         <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-            <p style="color: #64748b; font-size: 14px; margin-bottom: 8px; font-weight: 600;">Pesanan</p>
-            <h3 style="font-size: 28px; font-weight: bold; color: #0f172a;">{{ $total_transactions ?? $transaction_count ?? 0 }}</h3>
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 8px; font-weight: 600;">Pesanan Pending</p>
+            <h3 style="font-size: 28px; font-weight: bold; color: #b45309;">{{ $pending_count ?? $pending ?? 0 }}</h3>
         </div>
 
         <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-            <p style="color: #64748b; font-size: 14px; margin-bottom: 8px; font-weight: 600;">Omzet</p>
-            <h3 style="font-size: 28px; font-weight: bold; color: #059669;">Rp {{ number_format($total_amount ?? $total_revenue ?? 0, 0, ',', '.') }}</h3>
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 8px; font-weight: 600;">Pesanan Diproses (Paid + Shipped)</p>
+            <h3 style="font-size: 28px; font-weight: bold; color: #1d4ed8;">{{ $processed_count ?? $paid_shipped ?? 0 }}</h3>
+        </div>
+
+        <div style="background-color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 8px; font-weight: 600;">Omzet Bersih (Paid + Shipped)</p>
+            <h3 style="font-size: 28px; font-weight: bold; color: #059669;">Rp {{ number_format($net_revenue ?? $omzet_bersih ?? 0, 0, ',', '.') }}</h3>
         </div>
     </div>
 
     {{-- Tabel Daftar Pesanan --}}
     <div style="background-color: #ffffff; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow: hidden;">
-        <div style="padding: 18px 24px; border-bottom: 1px solid #e2e8f0;">
+        <div style="padding: 18px 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
             <h3 style="font-size: 18px; font-weight: bold; color: #0f172a;">Daftar Pesanan Masuk</h3>
+
+            <form action="/admin/transactions" method="GET" style="display: flex; align-items: center; gap: 10px; margin: 0;">
+                <label for="status-filter" style="font-size: 12px; font-weight: 800; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;">Filter Status</label>
+                <select id="status-filter" name="status" onchange="this.form.submit()" style="padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 13px; font-weight: 600; color: #0f172a; background-color: #ffffff; cursor: pointer;">
+                    <option value="Semua" {{ $status_filter === 'Semua' ? 'selected' : '' }}>Semua</option>
+                    <option value="Pending" {{ $status_filter === 'Pending' ? 'selected' : '' }}>Pending</option>
+                    <option value="Paid" {{ $status_filter === 'Paid' ? 'selected' : '' }}>Paid</option>
+                    <option value="Shipped" {{ $status_filter === 'Shipped' ? 'selected' : '' }}>Shipped</option>
+                </select>
+            </form>
         </div>
         <div style="overflow-x: auto;">
             <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;">
@@ -46,7 +61,8 @@
                         <th style="padding: 14px 20px;">Produk</th>
                         <th style="padding: 14px 20px;">Total Bayar</th>
                         <th style="padding: 14px 20px;">Status</th>
-                        <th style="padding: 14px 20px; text-align: center;">Aksi Status</th>
+                        <th style="padding: 14px 20px;">No. Resi</th>
+                        <th style="padding: 14px 20px; text-align: center;">Update Status &amp; Resi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -88,22 +104,28 @@
                                     </span>
                                 @endif
                             </td>
-                            <td style="padding: 14px 20px; text-align: center;">
-                                <form action="/admin/transactions/{{ $transaction->id }}/status" method="POST" style="display: inline-flex; gap: 8px;">
+                            <td style="padding: 14px 20px; color: #475569;">
+                                {{ $transaction->tracking_number ?: '-' }}
+                            </td>
+                            <td style="padding: 14px 20px;">
+                                <form action="/admin/transactions/{{ $transaction->id }}/status" method="POST" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 0;">
                                     @csrf
-                                    <button type="submit" name="status" value="Paid" style="background-color: #2563eb; color: white; border: none; padding: 6px 12px; border-radius: 5px; font-size: 13px; font-weight: 600; cursor: pointer;">
-                                        Set Lunas
-                                    </button>
-                                    <button type="submit" name="status" value="Shipped" style="background-color: #059669; color: white; border: none; padding: 6px 12px; border-radius: 5px; font-size: 13px; font-weight: 600; cursor: pointer;">
-                                        Set Dikirim
+                                    <select name="status" style="padding: 7px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; font-size: 13px; color: #0f172a; background-color: #ffffff; cursor: pointer;">
+                                        <option value="Pending" {{ $transaction->status === 'Pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="Paid" {{ $transaction->status === 'Paid' ? 'selected' : '' }}>Paid</option>
+                                        <option value="Shipped" {{ $transaction->status === 'Shipped' ? 'selected' : '' }}>Shipped</option>
+                                    </select>
+                                    <input type="text" name="tracking_number" value="{{ old('tracking_number', $transaction->tracking_number) }}" placeholder="No. resi" style="padding: 7px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; font-size: 13px; color: #0f172a; width: 120px;">
+                                    <button type="submit" style="background-color: #2563eb; color: white; border: none; padding: 7px 12px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer;">
+                                        Simpan
                                     </button>
                                 </form>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" style="padding: 30px; text-align: center; color: #94a3b8;">
-                                Belum ada data transaksi yang tercatat.
+                            <td colspan="7" style="padding: 30px; text-align: center; color: #94a3b8;">
+                                Belum ada data transaksi yang tercatat pada filter ini.
                             </td>
                         </tr>
                     @endforelse

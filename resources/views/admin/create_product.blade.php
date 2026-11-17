@@ -83,6 +83,27 @@
                     </div>
                 </div>
 
+                {{-- Input Kategori --}}
+                <div style="margin-bottom: 20px;">
+                    <label for="category" style="display: block; font-weight: 700; color: #0f172a; font-size: 14px; margin-bottom: 8px;">
+                        Kategori Produk <span style="color: #ef4444;">*</span>
+                    </label>
+                    <select id="category" name="category" required style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a; outline: none; background-color: #ffffff; cursor: pointer;">
+                        <option value="" disabled {{ old('category') ? '' : 'selected' }}>-- Pilih Kategori --</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category }}" {{ old('category') == $category ? 'selected' : '' }}>{{ $category }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                {{-- Input Stok --}}
+                <div style="margin-bottom: 20px;">
+                    <label for="stock" style="display: block; font-weight: 700; color: #0f172a; font-size: 14px; margin-bottom: 8px;">
+                        Stok Awal <span style="color: #ef4444;">*</span>
+                    </label>
+                    <input type="number" id="stock" name="stock" value="{{ old('stock', 0) }}" placeholder="0" min="0" required style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a; outline: none;">
+                </div>
+
                 {{-- Textarea Deskripsi --}}
                 <div style="margin-bottom: 24px;">
                     <label for="description" style="display: block; font-weight: 700; color: #0f172a; font-size: 14px; margin-bottom: 8px;">

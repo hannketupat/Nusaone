@@ -1,29 +1,43 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PesananSayaController;
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Route;
 
-// Halaman utama — katalog produk
+// 1. JALUR PUBLIK / FRONT-STORE
 Route::get('/', [ProductController::class, 'index']);
-
-// Halaman detail produk (dinamis berdasarkan ID)
 Route::get('/detail/{id}', [ProductController::class, 'show']);
 
-// CHECKOUT: Hanya SATU route GET dengan parameter {id}
-Route::get('/checkout/{id}', [ProductController::class, 'checkout']);
+// 2. JALUR AUTENTIKASI (LOGIN, REGISTER, LOGOUT)
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate']);
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
-// PROSES CHECKOUT (POST)
-Route::post('/checkout/proses', [ProductController::class, 'storeTransaction']);
+// 3. JALUR PEMBELI (WAJIB LOGIN)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', function () {
+        return redirect('/');
+    });
+    Route::get('/checkout/{id}', [ProductController::class, 'checkout']);
+    Route::post('/checkout/proses', [ProductController::class, 'storeTransaction']);
+    Route::get('/pesanan-saya', [PesananSayaController::class, 'index']);
+    Route::get('/berhasil/{id}', [ProductController::class, 'success']);
+});
 
-// HALAMAN BERHASIL (dengan ID transaksi)
-Route::get('/berhasil/{id}', [ProductController::class, 'success']);
+// 4. JALUR ADMIN / SELLER CENTER (WAJIB LOGIN + ROLE ADMIN)
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/transactions', [AdminController::class, 'transactions']);
+    Route::post('/admin/transactions/{id}/status', [AdminController::class, 'updateStatus']);
 
-// ADMIN TRANSAKSI
-Route::get('/admin/transactions', [AdminController::class, 'transactions']);
-Route::post('/admin/transactions/{id}/status', [AdminController::class, 'updateStatus']);
+    Route::get('/admin/products', [AdminController::class, 'products']);
+    Route::get('/admin/products/create', [AdminController::class, 'createProduct']);
+    Route::post('/admin/products/store', [AdminController::class, 'storeProduct']);
 
-// ADMIN PRODUK
-Route::get('/admin/products', [AdminController::class, 'products']);
-Route::get('/admin/products/create', [AdminController::class, 'createProduct']);
-Route::post('/admin/products/store', [AdminController::class, 'storeProduct']);
+    Route::get('/admin/products/{id}/edit', [AdminController::class, 'editProduct']);
+    Route::post('/admin/products/{id}/update', [AdminController::class, 'updateProduct']);
+    Route::post('/admin/products/{id}/delete', [AdminController::class, 'deleteProduct']);
+});

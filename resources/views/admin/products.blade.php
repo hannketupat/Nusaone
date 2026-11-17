@@ -28,8 +28,10 @@
                         <th style="padding: 16px 20px; width: 70px;">No</th>
                         <th style="padding: 16px 20px; width: 110px;">Thumbnail</th>
                         <th style="padding: 16px 20px;">Nama Produk</th>
+                        <th style="padding: 16px 20px;">Kategori</th>
+                        <th style="padding: 16px 20px;">Stok</th>
                         <th style="padding: 16px 20px;">Harga Satuan</th>
-                        <th style="padding: 16px 20px; text-align: center; width: 120px;">Aksi</th>
+                        <th style="padding: 16px 20px; text-align: center; width: 250px;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,19 +58,42 @@
                                 </div>
                             </td>
                             <td style="padding: 16px 20px;">
+                                <span style="display: inline-block; background-color: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;">
+                                    {{ $product->category ?? '-' }}
+                                </span>
+                            </td>
+                            <td style="padding: 16px 20px;">
+                                @if($product->stock > 0)
+                                    <span style="font-weight: 700; color: #047857;">{{ $product->stock }}</span>
+                                @else
+                                    <span style="font-weight: 700; color: #dc2626;">Habis</span>
+                                @endif
+                            </td>
+                            <td style="padding: 16px 20px;">
                                 <span style="font-weight: 800; color: #0f172a; font-size: 15px;">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </span>
                             </td>
                             <td style="padding: 16px 20px; text-align: center;">
-                                <a href="/detail/{{ $product->id }}" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: 600; font-size: 13px; padding: 6px 12px; border-radius: 6px; border: 1px solid #dbeafe; background-color: #eff6ff; display: inline-block;">
-                                    Lihat &rarr;
-                                </a>
+                                <div style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;">
+                                    <a href="/detail/{{ $product->id }}" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: 600; font-size: 13px; padding: 6px 12px; border-radius: 6px; border: 1px solid #dbeafe; background-color: #eff6ff; display: inline-block;">
+                                        Lihat &rarr;
+                                    </a>
+                                    <a href="/admin/products/{{ $product->id }}/edit" style="color: #b45309; text-decoration: none; font-weight: 600; font-size: 13px; padding: 6px 12px; border-radius: 6px; border: 1px solid #fde68a; background-color: #fffbeb; display: inline-block;">
+                                        Edit
+                                    </a>
+                                    <form action="/admin/products/{{ $product->id }}/delete" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini? Data dan foto produk akan dihapus permanen.');" style="display: inline-block; margin: 0;">
+                                        @csrf
+                                        <button type="submit" style="color: #dc2626; font-weight: 600; font-size: 13px; padding: 6px 12px; border-radius: 6px; border: 1px solid #fecaca; background-color: #fef2f2; cursor: pointer; font-family: inherit;">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" style="padding: 40px; text-align: center; color: #94a3b8;">
+                            <td colspan="7" style="padding: 40px; text-align: center; color: #94a3b8;">
                                 <p style="font-size: 16px; font-weight: 600; margin-bottom: 6px;">Belum ada produk yang terdaftar</p>
                                 <p style="font-size: 13px; margin-bottom: 16px;">Klik tombol di bawah untuk menambahkan produk pertama Anda.</p>
                                 <a href="/admin/products/create" style="background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 700;">
