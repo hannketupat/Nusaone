@@ -1,6 +1,55 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('konten_admin')
+    <style>
+        .btn-add-product {
+            background-color: #0A192F;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #0A192F;
+            box-shadow: 0 2px 6px rgba(10, 25, 47, 0.2);
+            transition: all 0.2s ease;
+        }
+        .btn-add-product:hover {
+            background-color: #C5A059;
+            border-color: #C5A059;
+            color: #ffffff;
+        }
+        .btn-view-product {
+            color: #0A192F;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid #C5A059;
+            background-color: #FDFBF7;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+        .btn-view-product:hover {
+            background-color: #C5A059;
+            color: #ffffff;
+        }
+        .badge-category {
+            display: inline-block;
+            background-color: #FDFBF7;
+            color: #0A192F;
+            border: 1px solid #C5A059;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+    </style>
+
     {{-- Flash Session Success --}}
     @if(session('success'))
         <div style="background-color: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; padding: 14px 20px; border-radius: 10px; margin-bottom: 25px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
@@ -11,10 +60,10 @@
     {{-- Header Halaman & Tombol Tambah Produk --}}
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 16px;">
         <div>
-            <h2 style="font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 4px;">Katalog Produk</h2>
+            <h2 style="font-size: 24px; font-weight: 800; color: #0A192F; margin-bottom: 4px;">Katalog Produk</h2>
             <p style="color: #64748b; font-size: 14px;">Kelola seluruh koleksi produk busana dan kerajinan etnik NusaOne.</p>
         </div>
-        <a href="/admin/products/create" style="background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 11px 20px; border-radius: 10px; font-size: 14px; font-weight: 700; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25); transition: background-color 0.2s;">
+        <a href="/admin/products/create" class="btn-add-product">
             <span>+</span> Tambah Produk Baru
         </a>
     </div>
@@ -50,7 +99,7 @@
                                 @endif
                             </td>
                             <td style="padding: 16px 20px;">
-                                <div style="font-weight: 700; color: #0f172a; margin-bottom: 4px; font-size: 15px;">
+                                <div style="font-weight: 700; color: #0A192F; margin-bottom: 4px; font-size: 15px;">
                                     {{ $product->name }}
                                 </div>
                                 <div style="color: #64748b; font-size: 13px; line-height: 1.4; max-width: 550px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
@@ -58,7 +107,7 @@
                                 </div>
                             </td>
                             <td style="padding: 16px 20px;">
-                                <span style="display: inline-block; background-color: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700;">
+                                <span class="badge-category">
                                     {{ $product->category ?? '-' }}
                                 </span>
                             </td>
@@ -70,13 +119,13 @@
                                 @endif
                             </td>
                             <td style="padding: 16px 20px;">
-                                <span style="font-weight: 800; color: #0f172a; font-size: 15px;">
+                                <span style="font-weight: 800; color: #0A192F; font-size: 15px;">
                                     Rp {{ number_format($product->price, 0, ',', '.') }}
                                 </span>
                             </td>
                             <td style="padding: 16px 20px; text-align: center;">
                                 <div style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;">
-                                    <a href="/detail/{{ $product->id }}" target="_blank" style="color: #2563eb; text-decoration: none; font-weight: 600; font-size: 13px; padding: 6px 12px; border-radius: 6px; border: 1px solid #dbeafe; background-color: #eff6ff; display: inline-block;">
+                                    <a href="/detail/{{ $product->id }}" target="_blank" class="btn-view-product">
                                         Lihat &rarr;
                                     </a>
                                     <a href="/admin/products/{{ $product->id }}/edit" style="color: #b45309; text-decoration: none; font-weight: 600; font-size: 13px; padding: 6px 12px; border-radius: 6px; border: 1px solid #fde68a; background-color: #fffbeb; display: inline-block;">
@@ -96,7 +145,7 @@
                             <td colspan="7" style="padding: 40px; text-align: center; color: #94a3b8;">
                                 <p style="font-size: 16px; font-weight: 600; margin-bottom: 6px;">Belum ada produk yang terdaftar</p>
                                 <p style="font-size: 13px; margin-bottom: 16px;">Klik tombol di bawah untuk menambahkan produk pertama Anda.</p>
-                                <a href="/admin/products/create" style="background-color: #2563eb; color: #ffffff; text-decoration: none; padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 700;">
+                                <a href="/admin/products/create" class="btn-add-product" style="padding: 9px 18px; font-size: 13px;">
                                     + Tambah Produk Sekarang
                                 </a>
                             </td>

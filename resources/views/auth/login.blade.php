@@ -10,26 +10,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; min-height: 100vh; padding: 24px; display: flex; align-items: center; justify-content: center; }
-        .login-box { background-color: #ffffff; border-radius: 16px; max-width: 430px; width: 100%; padding: 40px 36px; box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08); }
-        .seller-tag { display: inline-block; background-color: #0B5ED7; color: #ffffff; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 5px 10px; border-radius: 6px; margin-bottom: 16px; }
-        .login-box h1 { font-size: 26px; font-weight: 800; color: #0f172a; letter-spacing: -0.4px; margin-bottom: 8px; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8F9FA; min-height: 100vh; padding: 24px; display: flex; align-items: center; justify-content: center; }
+        .login-box { background-color: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; max-width: 430px; width: 100%; padding: 40px 36px; box-shadow: 0 14px 34px rgba(10, 25, 47, 0.08); }
+        .seller-tag { display: inline-block; background-color: #0A192F; color: #C5A059; border: 1px solid #C5A059; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 5px 10px; border-radius: 6px; margin-bottom: 16px; }
+        .login-box h1 { font-size: 26px; font-weight: 800; color: #0A192F; letter-spacing: -0.4px; margin-bottom: 8px; }
         .login-box .login-desc { color: #64748b; font-size: 14px; line-height: 1.6; margin-bottom: 26px; }
         .input-group { margin-bottom: 18px; }
-        .input-label { display: block; font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 7px; }
-        .input-field { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; font-family: inherit; color: #0f172a; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
-        .input-field:focus { border-color: #0B5ED7; box-shadow: 0 0 0 3px rgba(11, 94, 215, 0.12); }
+        .input-label { display: block; font-size: 13px; font-weight: 700; color: #0A192F; margin-bottom: 7px; }
+        .input-field { width: 100%; padding: 12px 14px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 14px; font-family: inherit; color: #0A192F; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+        .input-field:focus { border-color: #C5A059; box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15); }
         .password-field-wrap { position: relative; }
         .password-field-wrap .input-field { padding-right: 110px; }
         .toggle-password-btn { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 5px 12px; border-radius: 8px; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer; }
         .remember-group { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; }
-        .remember-group input { accent-color: #0B5ED7; width: 16px; height: 16px; cursor: pointer; }
+        .remember-group input { accent-color: #0A192F; width: 16px; height: 16px; cursor: pointer; }
         .remember-group label { font-size: 13px; font-weight: 500; color: #475569; cursor: pointer; }
-        .btn-submit { width: 100%; background-color: #0B5ED7; color: #ffffff; border: none; padding: 13px 24px; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: background-color 0.2s; }
-        .btn-submit:hover { background-color: #094bac; }
+        .btn-submit { width: 100%; background-color: #0A192F; color: #ffffff; border: 1px solid #0A192F; padding: 13px 24px; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; }
+        .btn-submit:hover { background-color: #C5A059; border-color: #C5A059; color: #ffffff; }
         .login-footer { margin-top: 22px; text-align: center; }
-        .login-footer a { color: #64748b; text-decoration: none; font-size: 13px; font-weight: 600; }
-        .login-footer a:hover { color: #0B5ED7; }
+        .login-footer a { color: #64748b; text-decoration: none; font-size: 13px; font-weight: 600; transition: color 0.2s; }
+        .login-footer a:hover { color: #C5A059; }
         .alert-success { background-color: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; font-weight: 500; }
         .alert-error { background-color: #fef2f2; color: #991b1b; border: 1px solid #fecaca; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 14px; font-weight: 500; }
     </style>

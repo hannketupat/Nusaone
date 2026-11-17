@@ -1,12 +1,46 @@
-@extends('layouts.admin')
+﻿@extends('layouts.admin')
 
 @section('konten_admin')
+    <style>
+        .btn-save {
+            background-color: #0A192F;
+            color: #ffffff;
+            border: 1px solid #0A192F;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(10, 25, 47, 0.2);
+            transition: all 0.2s ease;
+        }
+        .btn-save:hover {
+            background-color: #C5A059;
+            border-color: #C5A059;
+            color: #ffffff;
+        }
+        .link-back {
+            color: #64748b;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+        .link-back:hover {
+            color: #C5A059;
+        }
+    </style>
+
     {{-- Header Halaman --}}
     <div style="margin-bottom: 25px;">
-        <a href="/admin/products" style="color: #64748b; text-decoration: none; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+        <a href="/admin/products" class="link-back">
             &larr; Kembali ke Katalog Produk
         </a>
-        <h2 style="font-size: 24px; font-weight: 800; color: #0f172a; margin-bottom: 4px;">Tambah Produk Baru</h2>
+        <h2 style="font-size: 24px; font-weight: 800; color: #0A192F; margin-bottom: 4px;">Tambah Produk Baru</h2>
         <p style="color: #64748b; font-size: 14px;">Isi formulir di bawah ini untuk menambahkan barang dagangan baru ke katalog.</p>
     </div>
 
@@ -29,7 +63,7 @@
             
             {{-- KOLOM KIRI: Upload & Live Preview Gambar --}}
             <div style="background-color: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                <label style="display: block; font-weight: 700; color: #0f172a; font-size: 15px; margin-bottom: 8px;">
+                <label style="display: block; font-weight: 700; color: #0A192F; font-size: 15px; margin-bottom: 8px;">
                     Foto Produk <span style="color: #ef4444;">*</span>
                 </label>
                 <p style="color: #64748b; font-size: 13px; margin-bottom: 16px;">
@@ -64,31 +98,31 @@
                 
                 {{-- Input Nama Produk --}}
                 <div style="margin-bottom: 20px;">
-                    <label for="name" style="display: block; font-weight: 700; color: #0f172a; font-size: 14px; margin-bottom: 8px;">
+                    <label for="name" style="display: block; font-weight: 700; color: #0A192F; font-size: 14px; margin-bottom: 8px;">
                         Nama Produk <span style="color: #ef4444;">*</span>
                     </label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Contoh: Outer Batik Motif Biru Putih" required style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#2563eb';" onblur="this.style.borderColor='#cbd5e1';">
+                    <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Contoh: Outer Batik Motif Biru Putih" required style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0A192F; outline: none; transition: border-color 0.2s, box-shadow 0.2s;" onfocus="this.style.borderColor='#C5A059'; this.style.boxShadow='0 0 0 3px rgba(197, 160, 89, 0.15)';" onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
                 </div>
 
                 {{-- Input Harga (Prefix Rp) --}}
                 <div style="margin-bottom: 20px;">
-                    <label for="price" style="display: block; font-weight: 700; color: #0f172a; font-size: 14px; margin-bottom: 8px;">
+                    <label for="price" style="display: block; font-weight: 700; color: #0A192F; font-size: 14px; margin-bottom: 8px;">
                         Harga Satuan <span style="color: #ef4444;">*</span>
                     </label>
                     <div style="display: flex; align-items: center; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; background-color: #ffffff; transition: border-color 0.2s;">
                         <span style="background-color: #f1f5f9; color: #475569; font-weight: 700; font-size: 14px; padding: 12px 16px; border-right: 1px solid #cbd5e1;">
                             Rp
                         </span>
-                        <input type="number" id="price" name="price" value="{{ old('price') }}" placeholder="0" min="0" required style="width: 100%; padding: 12px 16px; border: none; font-size: 15px; font-weight: 600; font-family: inherit; color: #0f172a; outline: none;">
+                        <input type="number" id="price" name="price" value="{{ old('price') }}" placeholder="0" min="0" required style="width: 100%; padding: 12px 16px; border: none; font-size: 15px; font-weight: 600; font-family: inherit; color: #0A192F; outline: none;">
                     </div>
                 </div>
 
                 {{-- Input Kategori --}}
                 <div style="margin-bottom: 20px;">
-                    <label for="category" style="display: block; font-weight: 700; color: #0f172a; font-size: 14px; margin-bottom: 8px;">
+                    <label for="category" style="display: block; font-weight: 700; color: #0A192F; font-size: 14px; margin-bottom: 8px;">
                         Kategori Produk <span style="color: #ef4444;">*</span>
                     </label>
-                    <select id="category" name="category" required style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a; outline: none; background-color: #ffffff; cursor: pointer;">
+                    <select id="category" name="category" required style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0A192F; outline: none; background-color: #ffffff; cursor: pointer;">
                         <option value="" disabled {{ old('category') ? '' : 'selected' }}>-- Pilih Kategori --</option>
                         @foreach($categories as $category)
                             <option value="{{ $category }}" {{ old('category') == $category ? 'selected' : '' }}>{{ $category }}</option>
@@ -98,23 +132,23 @@
 
                 {{-- Input Stok --}}
                 <div style="margin-bottom: 20px;">
-                    <label for="stock" style="display: block; font-weight: 700; color: #0f172a; font-size: 14px; margin-bottom: 8px;">
+                    <label for="stock" style="display: block; font-weight: 700; color: #0A192F; font-size: 14px; margin-bottom: 8px;">
                         Stok Awal <span style="color: #ef4444;">*</span>
                     </label>
-                    <input type="number" id="stock" name="stock" value="{{ old('stock', 0) }}" placeholder="0" min="0" required style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a; outline: none;">
+                    <input type="number" id="stock" name="stock" value="{{ old('stock', 0) }}" placeholder="0" min="0" required style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0A192F; outline: none;">
                 </div>
 
                 {{-- Textarea Deskripsi --}}
                 <div style="margin-bottom: 24px;">
-                    <label for="description" style="display: block; font-weight: 700; color: #0f172a; font-size: 14px; margin-bottom: 8px;">
+                    <label for="description" style="display: block; font-weight: 700; color: #0A192F; font-size: 14px; margin-bottom: 8px;">
                         Deskripsi Lengkap <span style="color: #ef4444;">*</span>
                     </label>
-                    <textarea id="description" name="description" rows="5" placeholder="Tuliskan deskripsi lengkap mengenai bahan, motif, ukuran, dan keunikan produk..." required style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0f172a; outline: none; line-height: 1.5; resize: vertical; transition: border-color 0.2s;" onfocus="this.style.borderColor='#2563eb';" onblur="this.style.borderColor='#cbd5e1';">{{ old('description') }}</textarea>
+                    <textarea id="description" name="description" rows="5" placeholder="Tuliskan deskripsi lengkap mengenai bahan, motif, ukuran, dan keunikan produk..." required style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; font-family: inherit; color: #0A192F; outline: none; line-height: 1.5; resize: vertical; transition: border-color 0.2s, box-shadow 0.2s;" onfocus="this.style.borderColor='#C5A059'; this.style.boxShadow='0 0 0 3px rgba(197, 160, 89, 0.15)';" onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">{{ old('description') }}</textarea>
                 </div>
 
                 {{-- Tombol Submit & Batal --}}
                 <div style="display: flex; gap: 12px; align-items: center;">
-                    <button type="submit" style="background-color: #2563eb; color: #ffffff; border: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; transition: background-color 0.2s; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);">
+                    <button type="submit" class="btn-save">
                         Simpan Produk
                     </button>
                     <a href="/admin/products" style="background-color: #f1f5f9; color: #475569; text-decoration: none; padding: 12px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;">

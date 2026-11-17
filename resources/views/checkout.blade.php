@@ -3,29 +3,29 @@
 @section('styles')
 <style>
     .checkout-breadcrumb { margin-bottom: 25px; font-size: 14px; color: #64748b; }
-    .checkout-breadcrumb a { color: #0B5ED7; text-decoration: none; font-weight: 600; }
-    .checkout-breadcrumb a:hover { text-decoration: underline; }
-    .checkout-title { margin-bottom: 20px; color: #0f172a; font-size: 24px; font-weight: 800; }
+    .checkout-breadcrumb a { color: #0A192F; text-decoration: none; font-weight: 600; transition: color 0.2s; }
+    .checkout-breadcrumb a:hover { color: #C5A059; text-decoration: none; }
+    .checkout-title { margin-bottom: 20px; color: #0A192F; font-size: 24px; font-weight: 800; }
     .checkout-grid { display: flex; gap: 30px; align-items: flex-start; }
-    .checkout-form-card { width: 60%; background-color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #cbd5e1; }
+    .checkout-form-card { width: 60%; background-color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(10, 25, 47, 0.04); }
     .form-group { margin-bottom: 16px; }
-    .form-label { font-weight: 700; display: block; margin-bottom: 6px; font-size: 14px; color: #0f172a; }
-    .form-input { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 14px; color: #0f172a; outline: none; }
-    .form-input:focus { border-color: #0B5ED7; box-shadow: 0 0 0 3px rgba(11, 94, 215, 0.12); }
+    .form-label { font-weight: 700; display: block; margin-bottom: 6px; font-size: 14px; color: #0A192F; }
+    .form-input { width: 100%; padding: 10px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-family: inherit; font-size: 14px; color: #0A192F; outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-input:focus { border-color: #C5A059; box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15); }
     .form-row { display: flex; gap: 20px; margin-bottom: 20px; }
     .form-row > div:first-child { width: 65%; }
     .form-row > div:last-child { width: 35%; }
     .field-hint { font-size: 12px; color: #64748b; margin-top: 5px; }
     .field-error { font-size: 12px; color: #dc2626; font-weight: 700; margin-top: 5px; }
-    .btn-submit-order { background-color: #FFC107; color: #0f172a; padding: 15px; width: 100%; border: none; border-radius: 8px; font-family: inherit; font-weight: 800; font-size: 16px; cursor: pointer; }
-    .btn-submit-order:hover { background-color: #eab308; }
-    .btn-submit-order:disabled { background-color: #e2e8f0; color: #94a3b8; cursor: not-allowed; }
-    .summary-card { width: 40%; background-color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #cbd5e1; }
-    .summary-card h3 { margin-top: 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; font-size: 18px; color: #0f172a; }
+    .btn-submit-order { background-color: #0A192F; color: #ffffff; padding: 15px; width: 100%; border: 1px solid #0A192F; border-radius: 8px; font-family: inherit; font-weight: 800; font-size: 16px; cursor: pointer; transition: all 0.2s ease; }
+    .btn-submit-order:hover { background-color: #C5A059; border-color: #C5A059; color: #ffffff; }
+    .btn-submit-order:disabled { background-color: #e2e8f0; border-color: #e2e8f0; color: #94a3b8; cursor: not-allowed; }
+    .summary-card { width: 40%; background-color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(10, 25, 47, 0.04); }
+    .summary-card h3 { margin-top: 0; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; font-size: 18px; color: #0A192F; }
     .summary-img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; background-color: #f1f5f9; }
     .summary-img-empty { width: 100%; height: 180px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-bottom: 15px; background-color: #f1f5f9; color: #94a3b8; font-size: 13px; font-weight: 600; }
-    .summary-name { margin: 0 0 6px; color: #0f172a; font-size: 18px; }
-    .summary-price { color: #E63946; margin: 0 0 10px; font-size: 22px; }
+    .summary-name { margin: 0 0 6px; color: #0A192F; font-size: 18px; }
+    .summary-price { color: #C5A059; font-weight: 800; margin: 0 0 10px; font-size: 22px; }
     .summary-stock { font-size: 13px; color: #64748b; margin: 0 0 12px; font-weight: 600; }
     .summary-note { font-size: 13px; color: #64748b; line-height: 1.5; }
     .stock-warning { background-color: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; padding: 12px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; margin-bottom: 16px; }
@@ -46,7 +46,7 @@
         <span style="margin: 0 10px;">/</span>
         <a href="/detail/{{ $product->id }}">{{ $product->name }}</a>
         <span style="margin: 0 10px;">/</span>
-        <span style="color: #0f172a; font-weight: 700;">Checkout Pesanan</span>
+        <span style="color: #0A192F; font-weight: 700;">Checkout Pesanan</span>
     </div>
 
     <h2 class="checkout-title">Formulir Pengiriman &amp; Pembayaran</h2>

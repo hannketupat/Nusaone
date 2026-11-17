@@ -24,12 +24,13 @@
     .catalog-banner {
         position: relative;
         overflow: hidden;
-        background: linear-gradient(120deg, #1B2A4E 0%, #253a63 55%, #31497a 100%);
+        background: linear-gradient(120deg, #0A192F 0%, #0F223D 55%, #162E52 100%);
         border-radius: 20px;
         padding: 42px 44px;
         margin-bottom: 28px;
         color: #FFFFFF;
-        box-shadow: 0 14px 34px rgba(27, 42, 78, 0.22);
+        box-shadow: 0 14px 34px rgba(10, 25, 47, 0.22);
+        border: 1px solid rgba(197, 160, 89, 0.25);
     }
     .banner-bg-batik {
         position: absolute;
@@ -50,7 +51,7 @@
         top: -110px;
         width: 320px;
         height: 320px;
-        background: radial-gradient(circle, rgba(201, 162, 39, 0.35) 0%, rgba(201, 162, 39, 0) 68%);
+        background: radial-gradient(circle, rgba(197, 160, 89, 0.35) 0%, rgba(197, 160, 89, 0) 68%);
         border-radius: 50%;
         z-index: 1;
     }
@@ -74,8 +75,8 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background-color: rgba(201, 162, 39, 0.18);
-        border: 1px solid rgba(201, 162, 39, 0.45);
+        background-color: rgba(197, 160, 89, 0.18);
+        border: 1px solid rgba(197, 160, 89, 0.45);
         color: #F3D77A;
         font-size: 11px;
         font-weight: 800;
@@ -92,7 +93,7 @@
         letter-spacing: -0.8px;
         line-height: 1.18;
         margin-bottom: 10px;
-        text-shadow: 0 2px 10px rgba(15, 23, 42, 0.4);
+        text-shadow: 0 2px 10px rgba(10, 25, 47, 0.4);
         animation: fadeInUp 0.8s ease-out forwards;
     }
     .catalog-banner p {
@@ -100,7 +101,7 @@
         font-size: 15px;
         line-height: 1.6;
         margin-bottom: 20px;
-        text-shadow: 0 1px 6px rgba(15, 23, 42, 0.3);
+        text-shadow: 0 1px 6px rgba(10, 25, 47, 0.3);
         animation: fadeInUp 0.8s ease-out 0.2s both;
     }
     .banner-meta {
@@ -115,15 +116,16 @@
         align-items: center;
         gap: 9px;
         background-color: #FFFFFF;
-        color: #1B2A4E;
+        color: #0A192F;
         font-size: 14px;
         font-weight: 800;
         padding: 10px 18px;
         border-radius: 11px;
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+        border: 1px solid #E2E8F0;
     }
     .product-count-badge span {
-        color: #C9A227;
+        color: #C5A059;
         font-size: 18px;
         font-weight: 800;
     }
@@ -185,7 +187,7 @@
         font-weight: 500;
     }
     .search-info strong {
-        color: #1B2A4E;
+        color: #0A192F;
         font-weight: 800;
     }
     .search-info .search-icon {
@@ -248,19 +250,19 @@
         font-family: inherit;
         font-size: 13px;
         font-weight: 700;
-        color: #1B2A4E;
+        color: #0A192F;
         cursor: pointer;
         outline: none;
         transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
     }
     .sort-select:hover {
         background-color: #FFFFFF;
-        border-color: #94A3B8;
+        border-color: #C5A059;
     }
     .sort-select:focus {
         background-color: #FFFFFF;
-        border-color: #C9A227;
-        box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.14);
+        border-color: #C5A059;
+        box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.18);
     }
 
     /* ===== PRODUCT GRID ===== */
@@ -278,13 +280,13 @@
         overflow: hidden;
         display: flex;
         flex-direction: column;
-        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+        box-shadow: 0 2px 8px rgba(10, 25, 47, 0.05);
         transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }
     .product-card:hover {
-        transform: translateY(-6px);
-        border-color: #CBD5E1;
-        box-shadow: 0 18px 34px rgba(15, 23, 42, 0.13);
+        transform: translateY(-5px);
+        border-color: #C5A059;
+        box-shadow: 0 12px 24px rgba(10, 25, 47, 0.12);
     }
     .product-img-wrap {
         position: relative;
@@ -365,11 +367,11 @@
         font-weight: 800;
         letter-spacing: 1.1px;
         text-transform: uppercase;
-        color: #C9A227;
+        color: #C5A059;
         margin-bottom: 6px;
     }
     .product-name {
-        color: #1B2A4E;
+        color: #0A192F;
         font-size: 16px;
         font-weight: 700;
         line-height: 1.4;
@@ -387,7 +389,7 @@
         margin-bottom: 10px;
     }
     .product-stars {
-        color: #F59E0B;
+        color: #C5A059;
         font-size: 13px;
         letter-spacing: 1px;
         line-height: 1;
@@ -398,7 +400,7 @@
         color: #94A3B8;
     }
     .product-price {
-        color: #1B2A4E;
+        color: #0A192F;
         font-weight: 800;
         font-size: 20px;
         letter-spacing: -0.4px;
@@ -408,13 +410,13 @@
     .product-price small {
         font-size: 12px;
         font-weight: 700;
-        color: #94A3B8;
+        color: #C5A059;
         letter-spacing: 0;
     }
     .btn-detail {
         display: block;
         text-align: center;
-        background-color: #1B2A4E;
+        background-color: #0A192F;
         color: #FFFFFF;
         padding: 11px 10px;
         text-decoration: none;
@@ -422,11 +424,13 @@
         font-weight: 700;
         font-size: 13px;
         letter-spacing: 0.2px;
-        transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+        border: 1px solid #0A192F;
+        transition: all 0.2s ease;
     }
     .btn-detail:hover {
-        background-color: #C9A227;
-        color: #1B2A4E;
+        background-color: #C5A059;
+        border-color: #C5A059;
+        color: #FFFFFF;
         transform: translateY(-1px);
     }
 
@@ -438,7 +442,7 @@
         background-color: #FFFFFF;
         border: 1px dashed #CBD5E1;
         border-radius: 18px;
-        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.04);
+        box-shadow: 0 2px 10px rgba(10, 25, 47, 0.04);
     }
     .empty-icon {
         width: 74px;
@@ -456,7 +460,7 @@
         height: 34px;
     }
     .empty-state h3 {
-        color: #1B2A4E;
+        color: #0A192F;
         font-size: 20px;
         font-weight: 800;
         margin-bottom: 7px;
@@ -473,18 +477,20 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background-color: #1B2A4E;
+        background-color: #0A192F;
         color: #FFFFFF;
         text-decoration: none;
         font-size: 14px;
         font-weight: 700;
         padding: 11px 22px;
         border-radius: 10px;
-        transition: background-color 0.2s ease, transform 0.2s ease;
+        border: 1px solid #0A192F;
+        transition: all 0.2s ease;
     }
     .btn-show-all:hover {
-        background-color: #C9A227;
-        color: #1B2A4E;
+        background-color: #C5A059;
+        border-color: #C5A059;
+        color: #FFFFFF;
         transform: translateY(-1px);
     }
 

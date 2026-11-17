@@ -109,7 +109,7 @@
     }
     .btn-buy:hover {
         background-color: var(--gold);
-        color: var(--navy);
+        color: #ffffff;
     }
     .btn-buy-disabled,
     .btn-buy-disabled:hover {
